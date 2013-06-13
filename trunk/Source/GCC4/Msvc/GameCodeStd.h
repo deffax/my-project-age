@@ -34,6 +34,15 @@ public:
 	GCC_noncopyable() {};
 };
 
+
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
+
+extern const int MEGABYTE;
+extern const float SIXTY_HERTZ;
+
+
+#include "../GameCode4/GameCode.h"
 extern INT WINAPI GameCode4(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
                      LPWSTR    lpCmdLine,

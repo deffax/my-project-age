@@ -8,6 +8,12 @@
     <ClInclude Include="..\Debugging\Logger.h">
       <Filter>Debugging</Filter>
     </ClInclude>
+    <ClInclude Include="..\GameCode4\GameCode.h">
+      <Filter>GameCode4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mainloop\Initialization.h">
+      <Filter>MainLoop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -16,6 +22,12 @@
     </ClCompile>
     <ClCompile Include="..\Debugging\Logger.cpp">
       <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameCode4\GameCode.cpp">
+      <Filter>GameCode4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mainloop\Initialization.cpp">
+      <Filter>MainLoop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +39,9 @@
     </Filter>
     <Filter Include="Debugging">
       <UniqueIdentifier>{8db6583c-1e9f-4d5f-b952-880d7db4697a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainLoop">
+      <UniqueIdentifier>{c1904a33-30e9-43ba-b3e3-0fa796cf4949}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
