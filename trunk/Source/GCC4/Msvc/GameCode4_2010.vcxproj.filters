@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="GameCodeStd.h" />
+    <ClInclude Include="..\Multicore\CriticalSection.h">
+      <Filter>Multicore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Debugging\Logger.h">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameCodeStd.cpp" />
+    <ClCompile Include="..\GameCode4\GameCode4.cpp">
+      <Filter>GameCode4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Debugging\Logger.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="GameCode4">
+      <UniqueIdentifier>{74f3dbea-9bcc-46d5-ae1d-11fde33f34cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Multicore">
+      <UniqueIdentifier>{37a44d55-0dec-4afe-9f47-8a9491ab06f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debugging">
+      <UniqueIdentifier>{8db6583c-1e9f-4d5f-b952-880d7db4697a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
