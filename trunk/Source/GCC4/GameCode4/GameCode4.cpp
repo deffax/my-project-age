@@ -8,8 +8,7 @@ INT WINAPI GameCode4(HINSTANCE hInstance,
                      LPWSTR    lpCmdLine,
                      int       nCmdShow)
 {
-	
-	Logger::Init("logging.xml");
+	Logger::Init("\\Game\\Logging.xml");
 
 	Logger::Destroy();
     return 0;	
