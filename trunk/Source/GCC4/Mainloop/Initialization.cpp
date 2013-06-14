@@ -37,3 +37,20 @@ bool CheckStorage(const DWORDLONG diskSpaceNeeded)
 	}
 	return true;
 }
+
+
+DWORD ReadCPUSpeed()
+{
+	DWORD BufSize = sizeof(DWORD);
+	DWORD dwMHz = 0;
+	DWORD type = REG_DWORD;
+	HKEY hKey;
+	long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+		L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0",
+		0, KEY_READ, &hKey);
+	if(lError == ERROR_SUCCESS)
+	{
+		RegQueryValueEx(hKey, L"~MHz", NULL, &type, (LPBYTE) &dwMHz, &BufSize);
+	}
+	return dwMHz;
+}

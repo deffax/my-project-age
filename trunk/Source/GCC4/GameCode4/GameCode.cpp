@@ -27,7 +27,19 @@ bool GameCodeApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd,
 
 		if(!CheckStorage(diskSpace))
 			return false;
+
+		const DWORD minCPUSpeed = 1300;
+		DWORD thisCPU = ReadCPUSpeed();
+		if(thisCPU < minCPUSpeed)
+		{
+			GCC_ERROR("GetCPUSpeed reports CPU is too slow for this game.");
+			return false;
+		}
+		resourceCheck = true;
 	}
+
+
+	
 
 	return true; //PROVVISORIO!!!!
 }
