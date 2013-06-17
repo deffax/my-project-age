@@ -11,7 +11,12 @@
 #include <map>
 #include <list>
 
+#include <DXUT.h>
 #include <tinyxml.h>
+
+#include <tchar.h>
+
+#include <algorithm>
 
 #include "../Debugging/Logger.h"
 

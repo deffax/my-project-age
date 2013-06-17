@@ -14,6 +14,9 @@
     <ClInclude Include="..\Mainloop\Initialization.h">
       <Filter>MainLoop</Filter>
     </ClInclude>
+    <ClInclude Include="..\ResourceCache\ZipFile.h">
+      <Filter>ResourceCache</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -29,6 +32,9 @@
     <ClCompile Include="..\Mainloop\Initialization.cpp">
       <Filter>MainLoop</Filter>
     </ClCompile>
+    <ClCompile Include="..\ResourceCache\ZipFile.cpp">
+      <Filter>ResourceCache</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameCode4">
@@ -42,6 +48,9 @@
     </Filter>
     <Filter Include="MainLoop">
       <UniqueIdentifier>{c1904a33-30e9-43ba-b3e3-0fa796cf4949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceCache">
+      <UniqueIdentifier>{e321db12-ada3-4ee7-9bd9-855d40ecd0bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
