@@ -203,6 +203,7 @@
     <ClInclude Include="..\GameCode4\GameCode.h" />
     <ClInclude Include="..\Mainloop\Initialization.h" />
     <ClInclude Include="..\Multicore\CriticalSection.h" />
+    <ClInclude Include="..\ResourceCache\ZipFile.h" />
     <ClInclude Include="GameCodeStd.h" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +211,7 @@
     <ClCompile Include="..\GameCode4\GameCode.cpp" />
     <ClCompile Include="..\GameCode4\GameCode4.cpp" />
     <ClCompile Include="..\Mainloop\Initialization.cpp" />
+    <ClCompile Include="..\ResourceCache\ZipFile.cpp" />
     <ClCompile Include="GameCodeStd.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">GameCodeStd.h</PrecompiledHeaderFile>
