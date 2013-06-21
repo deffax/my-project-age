@@ -39,6 +39,7 @@ public:
 	GCC_noncopyable() {};
 };
 
+#include "../GameCode4/Interfaces.h"
 
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;

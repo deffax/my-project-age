@@ -8,7 +8,7 @@
 #pragma comment(lib, "zlibstat.lib")
 
 
-#include "../ResourceCache/ZipFile.h"
+
 
 
 INT WINAPI GameCode4(HINSTANCE hInstance,
