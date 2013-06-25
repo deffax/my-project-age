@@ -19,7 +19,7 @@
 #include <algorithm>
 
 #include "../Debugging/Logger.h"
-
+#include "../Utilities/templates.h"
 
 
 #if defined(_DEBUG)
@@ -46,6 +46,18 @@ extern const int SCREEN_HEIGHT;
 
 extern const int MEGABYTE;
 extern const float SIXTY_HERTZ;
+
+#if !defined(SAFE_DELETE)
+	#define SAFE_DELETE(x) if(x) delete x; x=NULL;
+#endif
+
+#if !defined(SAFE_DELETE_ARRAY)
+	#define SAFE_DELETE_ARRAY(x) if (x) delete [] x; x=NULL; 
+#endif
+
+#if !defined(SAFE_RELEASE)
+	#define SAFE_RELEASE(x) if(x) x->Release(); x=NULL;
+#endif
 
 
 #include "../GameCode4/GameCode.h"
