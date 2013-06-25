@@ -23,6 +23,9 @@
     <ClInclude Include="..\ResourceCache\ResCache.h">
       <Filter>ResourceCache</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\templates.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -60,6 +63,9 @@
     </Filter>
     <Filter Include="ResourceCache">
       <UniqueIdentifier>{e321db12-ada3-4ee7-9bd9-855d40ecd0bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{974a57ed-6f50-401a-ba08-c1a10d22c93f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

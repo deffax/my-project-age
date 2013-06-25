@@ -206,6 +206,7 @@
     <ClInclude Include="..\Multicore\CriticalSection.h" />
     <ClInclude Include="..\ResourceCache\ResCache.h" />
     <ClInclude Include="..\ResourceCache\ZipFile.h" />
+    <ClInclude Include="..\Utilities\templates.h" />
     <ClInclude Include="GameCodeStd.h" />
   </ItemGroup>
   <ItemGroup>
