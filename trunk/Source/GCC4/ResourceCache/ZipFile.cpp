@@ -79,11 +79,10 @@ struct ZipFile::TZipDirFileHeader
 #pragma pack()
 
 bool ZipFile::Init(const std::wstring &resFileName)
-//bool ZipFile::Init(FILE* m_pFile)
 {
   End();
 
-  //_wfopen_s(&m_pFile, resFileName.c_str(), _T("rb"));
+  _wfopen_s(&m_pFile, resFileName.c_str(), _T("rb"));
   if (!m_pFile)
     return false;
 

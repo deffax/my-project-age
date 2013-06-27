@@ -10,6 +10,8 @@
 #include <string>
 #include <map>
 #include <list>
+#include <vector>
+#include <memory.h>
 
 #include <DXUT.h>
 #include <tinyxml.h>
@@ -21,6 +23,7 @@
 #include "../Debugging/Logger.h"
 #include "../Utilities/templates.h"
 
+using std::tr1::shared_ptr;
 
 #if defined(_DEBUG)
 #   define GCC_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)

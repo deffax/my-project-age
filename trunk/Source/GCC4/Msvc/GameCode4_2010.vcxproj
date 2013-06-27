@@ -206,6 +206,7 @@
     <ClInclude Include="..\Multicore\CriticalSection.h" />
     <ClInclude Include="..\ResourceCache\ResCache.h" />
     <ClInclude Include="..\ResourceCache\ZipFile.h" />
+    <ClInclude Include="..\Utilities\String.h" />
     <ClInclude Include="..\Utilities\templates.h" />
     <ClInclude Include="GameCodeStd.h" />
   </ItemGroup>
@@ -216,6 +217,7 @@
     <ClCompile Include="..\Mainloop\Initialization.cpp" />
     <ClCompile Include="..\ResourceCache\ResCache.cpp" />
     <ClCompile Include="..\ResourceCache\ZipFile.cpp" />
+    <ClCompile Include="..\Utilities\String.cpp" />
     <ClCompile Include="GameCodeStd.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">GameCodeStd.h</PrecompiledHeaderFile>
