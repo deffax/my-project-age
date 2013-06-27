@@ -18,6 +18,7 @@ INT WINAPI GameCode4(HINSTANCE hInstance,
 {
 	Logger::Init("Logging.xml");
 	
+
 	Logger::Destroy();
     return 0;	
 }
