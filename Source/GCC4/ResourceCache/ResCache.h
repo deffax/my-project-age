@@ -123,7 +123,7 @@ public:
 
 	shared_ptr<ResHandle> GetHandle(Resource * r);
 
-	int Preload(const std::string pattern, void (*progressCallback)(int, bool &));
+	//int Preload(const std::string pattern, void (*progressCallback)(int, bool &));
 	std::vector<std::string> Match(const std::string pattern);
 
 	void Flush(void);

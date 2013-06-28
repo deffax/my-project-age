@@ -240,3 +240,69 @@ char* ResCache::Allocate(unsigned int size)
 
 	return mem;
 }
+
+void ResCache::FreeOneResource()
+{
+	ResHandleList::iterator gonner = m_lru.end();
+	gonner--;
+	shared_ptr<ResHandle> handle = *gonner;
+
+	m_lru.pop_back();
+	m_resources.erase(handle->m_resource.m_name);
+}
+
+bool ResCache::MakeRoom(unsigned int size)
+{
+	if(size > m_cacheSize)
+	{
+		return false;
+	}
+
+	while(size > (m_cacheSize - m_allocated))
+	{
+		if(m_lru.empty())
+			return false;
+		FreeOneResource();
+	}
+	return true;
+
+}
+
+void ResCache::Free(shared_ptr<ResHandle> gonner)
+{
+	m_lru.remove(gonner);
+	m_resources.erase(gonner->m_resource.m_name);
+}
+
+void ResCache::Flush()
+{
+	while(!m_lru.empty())
+	{
+		shared_ptr<ResHandle> handle = *(m_lru.begin());
+		Free(handle);
+		m_lru.pop_front();
+	}
+}
+
+void ResCache::MemoryHasBeenFreed(unsigned int size)
+{
+	m_allocated -= size;
+}
+
+std::vector<std::string> ResCache::Match(const std::string pattern)
+{
+	std::vector<std::string> matchingNames;
+	if(m_file == NULL)
+		return matchingNames;
+	int numFiles = m_file->VGetNumResources();
+	for(int i = 0; i < numFiles; i++)
+	{
+		std::string name = m_file->VGetResourceName(i);
+		std::transform(name.begin(), name.end(), name.begin(), (int(*)(int)) std::tolower);
+		if(WildcardMatch(pattern.c_str(), name.c_str()))
+		{
+			matchingNames.push_back(name);
+		}
+	}
+	return matchingNames;
+}
