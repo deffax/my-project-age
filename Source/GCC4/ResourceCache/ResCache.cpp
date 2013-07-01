@@ -70,6 +70,11 @@ std::string ResourceZipFile::VGetResourceName(int num) const
 	return resName;
 }
 
+bool ResourceZipFile::VIsUsingDevelopmentDirectories() const
+{
+	return false;
+}
+
 
 ResHandle::ResHandle(Resource& resource, char* buffer, unsigned int size, ResCache* pResCache)
 	: m_resource(resource)

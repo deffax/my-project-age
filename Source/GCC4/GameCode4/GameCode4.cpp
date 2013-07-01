@@ -22,7 +22,7 @@ INT WINAPI GameCode4(HINSTANCE hInstance,
 {
 	Logger::Init("Logging.xml");
 	//test
-	char* buffer = NULL;
+	/*char* buffer = NULL;
 	const basic_string <wchar_t> resFileName( L"Assets.zip" );
 	ZipFile zipFile;
 	if(zipFile.Init(resFileName))
@@ -37,8 +37,18 @@ INT WINAPI GameCode4(HINSTANCE hInstance,
 				zipFile.ReadFile(*index, buffer);
 			}
 		}
+	}*/
+	const basic_string <wchar_t> resFileName( L"Assets.zip" );
+	ResourceZipFile* zipFile = GCC_NEW ResourceZipFile(resFileName);
+	//ResCache resCache(50, zipFile);
+	ResCache* resCache = GCC_NEW ResCache(50, zipFile);
+	if(resCache->Init())
+	{
+		Resource resource("\\Logger.xml");
+		shared_ptr<ResHandle> handle = resCache->GetHandle(&resource);
+		int size = handle->Size();
+		char *xfile = (char*) handle->Buffer();
 	}
-
 	// end test
 
 
