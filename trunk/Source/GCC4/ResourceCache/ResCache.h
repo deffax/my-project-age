@@ -36,10 +36,7 @@ public:
 	virtual int VGetRawResource(const Resource& r, char* buffer);
 	virtual int VGetNumResources() const;
 	virtual std::string VGetResourceName(int num) const;
-	virtual bool VIsUsingDevelopmenteDirectory() const
-	{
-		return false;
-	}
+	virtual bool VIsUsingDevelopmentDirectories() const;
 };
 
 
