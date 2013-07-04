@@ -1,6 +1,11 @@
 #include "GameCodeStd.h"
-#include "Initialization.h"
 #include <direct.h>
+#include "Initialization.h"
+
+
+
+
+
 
 bool IsOnlyInstance(LPCTSTR gameTitle)
 {
@@ -53,4 +58,32 @@ DWORD ReadCPUSpeed()
 		RegQueryValueEx(hKey, L"~MHz", NULL, &type, (LPBYTE) &dwMHz, &BufSize);
 	}
 	return dwMHz;
+}
+
+GameOptions::GameOptions()
+{
+	m_useDevelopmentDirectories = false;
+	m_pDoc = NULL;
+}
+
+void GameOptions::Init(const char* xmlFileName, LPWSTR lpCmdLine)
+{
+	
+
+	m_pDoc = new TiXmlDocument(xmlFileName);
+	if (m_pDoc && m_pDoc->LoadFile())
+	{
+        TiXmlElement *pRoot = m_pDoc->RootElement();
+        if (!pRoot)
+            return;
+
+        TiXmlElement* pNode = NULL;
+
+		pNode = pRoot->FirstChildElement("ResCache");
+		if(pNode)
+		{
+			std::string attribute(pNode->Attribute("useDevelopmentDirectories"));
+			m_useDevelopmentDirectories = ((attribute == "yes") ? (true) : (false));
+		}
+	}
 }
