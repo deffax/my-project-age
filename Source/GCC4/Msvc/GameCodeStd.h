@@ -14,7 +14,11 @@
 #include <memory.h>
 
 
-#include <DXUT.h>
+// DirectX Includes
+
+#include <d3dx9tex.h>
+#include <dxut.h>
+#include <SDKmisc.h>
 #include <tinyxml.h>
 
 #include <tchar.h>
