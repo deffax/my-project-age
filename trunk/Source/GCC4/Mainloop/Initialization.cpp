@@ -62,6 +62,7 @@ DWORD ReadCPUSpeed()
 
 GameOptions::GameOptions()
 {
+	m_Renderer = "Direct3D 9";
 	m_useDevelopmentDirectories = false;
 	m_pDoc = NULL;
 }
@@ -78,6 +79,39 @@ void GameOptions::Init(const char* xmlFileName, LPWSTR lpCmdLine)
             return;
 
         TiXmlElement* pNode = NULL;
+
+
+		pNode = pRoot->FirstChildElement("Graphics");
+		if(pNode)
+		{
+			std::string attribute(pNode->Attribute("renderer"));
+			if(attribute != "Direct3D 9" && attribute != "Direct3D 11")
+			{
+				GCC_ASSERT(0 && "Bad rendering setting in Graphics options");
+			}
+			else
+			{
+				m_Renderer = attribute;
+			}
+
+			if(pNode->Attribute("width"))
+			{
+				m_ScreenSize.x = atoi(pNode->Attribute("width")); 
+				if(m_ScreenSize.x < 800) 
+					m_ScreenSize.x = 800;
+			}
+			if(pNode->Attribute("height"))
+			{
+				m_ScreenSize.y = atoi(pNode->Attribute("height")); 
+				if(m_ScreenSize.y< 600) 
+					m_ScreenSize.y = 600;
+			}
+			if(pNode->Attribute("runfullspeed"))
+			{
+				attribute = pNode->Attribute("runfullspeed");
+				m_runFullSpeed = (attribute == "yes") ? true : false;
+			}
+		}
 
 		pNode = pRoot->FirstChildElement("ResCache");
 		if(pNode)

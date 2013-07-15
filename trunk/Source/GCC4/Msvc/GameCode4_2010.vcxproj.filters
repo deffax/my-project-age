@@ -29,6 +29,9 @@
     <ClInclude Include="..\Utilities\String.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\types.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />

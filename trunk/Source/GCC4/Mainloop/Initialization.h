@@ -7,6 +7,12 @@ extern DWORD ReadCPUSpeed();
 struct GameOptions
 {
 
+	//rendering options
+	std::string m_Renderer;
+	bool m_runFullSpeed;
+	Point m_ScreenSize;
+
+
     // resource cache options
     bool m_useDevelopmentDirectories;
 
