@@ -27,6 +27,7 @@
 
 #include "../Debugging/Logger.h"
 #include "../Utilities/templates.h"
+#include "../Utilities/types.h"
 
 using std::tr1::shared_ptr;
 
