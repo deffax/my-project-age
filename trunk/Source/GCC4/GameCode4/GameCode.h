@@ -16,6 +16,8 @@ public:
 	struct GameOptions m_Options;
 	class ResCache* m_resCache;
 
+	bool LoadStrings(std::string language);
+
 	// DirectX9 Specific Stuff
 	static bool CALLBACK IsD3D9DeviceAcceptable( D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat, bool bWindowed, void* pUserContext );
 	static HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext );
