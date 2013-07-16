@@ -30,6 +30,9 @@
 #include "../Utilities/types.h"
 
 using std::tr1::shared_ptr;
+using std::tr1::weak_ptr;
+using std::tr1::static_pointer_cast;
+using std::tr1::dynamic_pointer_cast;
 
 #if defined(_DEBUG)
 #   define GCC_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
