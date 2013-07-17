@@ -59,6 +59,8 @@ extern const int SCREEN_HEIGHT;
 extern const int MEGABYTE;
 extern const float SIXTY_HERTZ;
 
+
+
 #if !defined(SAFE_DELETE)
 	#define SAFE_DELETE(x) if(x) delete x; x=NULL;
 #endif

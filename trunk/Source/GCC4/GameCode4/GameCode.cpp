@@ -1,6 +1,8 @@
 #include "GameCodeStd.h"
 #include "../Mainloop/Initialization.h"
 #include "../ResourceCache/ResCache.h"
+#include "../ResourceCache/XmlResource.h"
+#include "../Utilities/String.h"
 
 GameCodeApp* g_pApp = NULL;
 
@@ -50,8 +52,83 @@ bool GameCodeApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd,
 	}
 	
 
+	extern shared_ptr<IResourceLoader> CreateXmlResourceLoader();
+
+	m_resCache->RegisterLoader(CreateXmlResourceLoader());
+
+	if(!LoadStrings("English"))
+	{
+		GCC_ERROR("Failed to Load strings");
+		return false;
+	}
+
+	
+
 	return true; //PROVVISORIO!!!!
 }
+
+
+std::wstring GameCodeApp::GetString(std::wstring sID)
+{
+	auto localizedString = m_textResource.find(sID);
+	if(localizedString == m_textResource.end())
+	{
+		GCC_ASSERT(0 && "String not found");
+		return L"";
+	}
+	return localizedString->second;
+}
+
+UINT GameCodeApp::MapCharToKeyCode(const char pHotKey)
+{
+	if(pHotKey >= '0' && pHotKey <= '9')
+		return 0x30 + pHotKey -'0';
+
+	if(pHotKey >= 'A' && pHotKey <= 'Z')
+		return 0x41 + pHotKey -'A';
+
+	GCC_ASSERT(0 && "Platform specific hotkey is not defined");
+	return 0;
+}
+
+bool GameCodeApp::LoadStrings(std::string language)
+{
+	std::string languageFile = "Strings\\";
+	languageFile += language;
+	languageFile += ".xml";
+
+	TiXmlElement* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement(languageFile.c_str());
+	if(!pRoot)
+	{
+		GCC_ERROR("Strings are missing.");
+		return false;
+	}
+
+	for(TiXmlElement* pElem = pRoot->FirstChildElement();
+		pElem; pElem = pElem->NextSiblingElement())
+	{
+		const char* pKey = pElem->Attribute("id");
+		const char* pText = pElem->Attribute("value");
+		const char* pHotKey = pElem->Attribute("hotkey");
+
+		if(pKey && pText)
+		{
+			wchar_t wideKey[64];
+			wchar_t wideText[1024];
+			AnsiToWideCch(wideKey, pKey, 64);
+			AnsiToWideCch(wideText, pText, 1024);
+			
+			m_textResource[std::wstring(wideKey)] = std::wstring(wideText);
+
+			if(pHotKey)
+			{
+				m_hotkeys[std::wstring(wideKey)] = MapCharToKeyCode(*pHotKey);
+			}
+		}
+	}
+	return true;
+}
+
 
 //--------------------------------------------------------------------------------------
 // Create any D3D9 resources that won't live through a device reset (D3DPOOL_DEFAULT) 

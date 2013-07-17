@@ -7,3 +7,4 @@ const int SCREEN_HEIGHT = 600;
 
 const int MEGABYTE = 1024 * 1024;
 const float SIXTY_HERTZ = 16.66f;
+
