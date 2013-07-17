@@ -5,6 +5,7 @@ class GameCodeApp
 {
 protected:
 	std::map<std::wstring, std::wstring> m_textResource;
+	std::map<std::wstring, UINT> m_hotkeys;
 public:
 	GameCodeApp();
 
@@ -17,6 +18,8 @@ public:
 	class ResCache* m_resCache;
 
 	bool LoadStrings(std::string language);
+	std::wstring GetString(std::wstring sID);
+	UINT MapCharToKeyCode(const char pHotKey);
 
 	// DirectX9 Specific Stuff
 	static bool CALLBACK IsD3D9DeviceAcceptable( D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat, bool bWindowed, void* pUserContext );

@@ -21,8 +21,6 @@ public:
 	virtual bool VDiscardRawBufferAfterLoad() { return true; }
     virtual unsigned int VGetLoadedResourceSize(char *rawBuffer, unsigned int rawSize) { return rawSize; }
     virtual bool VLoadResource(char *rawBuffer, unsigned int rawSize, shared_ptr<ResHandle> handle);
-    virtual std::string VGetPattern() { return "*.xml"; }
-
-    
+    virtual std::string VGetPattern() { return "*.xml"; }    
     static TiXmlElement* LoadAndReturnRootXmlElement(const char* resourceString);
 };
