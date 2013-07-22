@@ -131,3 +131,41 @@ private:
 	void construct(T const & t)  { new (GetT()) T(t); }
     void destroy() { GetT()->~T(); }
 };
+
+
+template <class BaseType, class SubType>
+BaseType* GenericObjectCreationFunction()
+{
+	return new SubType;
+}
+
+template <class BaseClass, class IdType>
+class GenericObjectFactory
+{
+	typedef BaseClass* (*ObjectCreationFunction)();
+	std::map<IdType, ObjectCreationFunction> m_creationFunctions;
+
+public:
+	template <class SubClass>
+	bool Register(IdType id)
+	{
+		auto findIt = m_creationFunctions.find(id);
+		if(findIt == m_creationFunctions.end())
+		{
+			m_creaztionFunctions[id] = &GenericObjectCreationFunction<BaseClass, SubClass>;
+			return true;
+		}
+		return false;
+	}
+
+	BaseClass* Create(IdType id)
+	{
+		auto findIt = m_creationFunctions.find(id);
+		if(findIt != m_creationFunctions.end())
+		{
+			ObjectCreationFunction pFunc = findIt->second;
+			return pFunc();
+		}
+		return NULL;
+	}
+};
