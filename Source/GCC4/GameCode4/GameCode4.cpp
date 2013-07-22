@@ -56,6 +56,15 @@ INT WINAPI GameCode4(HINSTANCE hInstance,
 
     // Show the cursor and clip it when in full screen
     DXUTSetCursorSettings( true, true );
+
+	if(!g_pApp->InitInstance(hInstance, lpCmdLine, 0,
+		g_pApp->m_Options.m_ScreenSize.x,
+		g_pApp->m_Options.m_ScreenSize.y))
+	{
+		return FALSE;
+	}
+
+
 	DXUTMainLoop();
 	DXUTShutdown();
 	Logger::Destroy();

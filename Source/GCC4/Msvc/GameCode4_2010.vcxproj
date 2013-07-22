@@ -200,6 +200,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Debugging\Logger.h" />
+    <ClInclude Include="..\EventManager\EventManager.h" />
+    <ClInclude Include="..\EventManager\EventManagerImpl.h" />
     <ClInclude Include="..\GameCode4\GameCode.h" />
     <ClInclude Include="..\GameCode4\Interfaces.h" />
     <ClInclude Include="..\Mainloop\Initialization.h" />
@@ -214,6 +216,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Debugging\Logger.cpp" />
+    <ClCompile Include="..\EventManager\EventManager.cpp" />
+    <ClCompile Include="..\EventManager\EventManagerImp.cpp" />
     <ClCompile Include="..\GameCode4\GameCode.cpp" />
     <ClCompile Include="..\GameCode4\GameCode4.cpp" />
     <ClCompile Include="..\Mainloop\Initialization.cpp" />

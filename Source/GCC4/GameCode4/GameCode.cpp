@@ -51,6 +51,7 @@ bool GameCodeApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd,
 		return false;
 	}
 	
+	
 
 	extern shared_ptr<IResourceLoader> CreateXmlResourceLoader();
 

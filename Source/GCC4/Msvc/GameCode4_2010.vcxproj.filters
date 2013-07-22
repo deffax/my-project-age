@@ -35,6 +35,12 @@
     <ClInclude Include="..\ResourceCache\XmlResource.h">
       <Filter>ResourceCache</Filter>
     </ClInclude>
+    <ClInclude Include="..\EventManager\EventManager.h">
+      <Filter>EventManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EventManager\EventManagerImpl.h">
+      <Filter>EventManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -62,6 +68,12 @@
     <ClCompile Include="..\ResourceCache\XmlResource.cpp">
       <Filter>ResourceCache</Filter>
     </ClCompile>
+    <ClCompile Include="..\EventManager\EventManager.cpp">
+      <Filter>EventManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EventManager\EventManagerImp.cpp">
+      <Filter>EventManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameCode4">
@@ -81,6 +93,9 @@
     </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{974a57ed-6f50-401a-ba08-c1a10d22c93f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventManager">
+      <UniqueIdentifier>{ae34cb3a-fb59-4927-8493-8a3a0c8589ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
