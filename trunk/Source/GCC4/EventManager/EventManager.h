@@ -52,7 +52,7 @@ public:
 	virtual bool VTriggerEvent(const IEventDataPtr& pEvent) const = 0;
 	virtual bool VQueueEvent(const IEventDataPtr& pEvent) = 0;
 	//virtual bool VThreadSafeQueueEvent(const IEventDataPtr& pEvent) = 0;
-	virtual bool VAbortEvent(const IEventDataPtr& pEvent, bool allOfType = false) = 0;
+	virtual bool VAbortEvent(const EventType& pEvent, bool allOfType = false) = 0;
 	virtual bool VUpdate(unsigned long maxMillis = kINFINITE) = 0;
 
 	static IEventManager* Get(void);

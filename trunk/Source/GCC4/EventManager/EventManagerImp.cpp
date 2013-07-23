@@ -76,3 +76,122 @@ bool EventManager::VTriggerEvent(const IEventDataPtr& pEvent) const
 	}
 	return processed;
 }
+
+bool EventManager::VQueueEvent(const IEventDataPtr& pEvent)
+{
+	GCC_ASSERT(m_activeQueue >= 0);
+	GCC_ASSERT(m_activeQueue < EVENTMANAGER_NUM_QUEUES);
+
+	if(!pEvent)
+	{
+		GCC_ERROR("Invalid event in VQueueEvent.");
+		return false;
+	}
+
+	GCC_LOG("Events", "Attemping to queue event " + std::string(pEvent->GetName()));
+
+	auto findIt = m_eventListeners.find(pEvent->VGetEventType());
+	if(findIt != m_eventListeners.end())
+	{
+		m_queues[m_activeQueue].push_back(pEvent);
+		GCC_LOG("Events", "Successfully queued event " + std::string(pEvent->GetName()));
+		return true;
+	}
+	else
+	{
+		GCC_LOG("Events", "Skipping event, since there are no delegate registered to recive it: "
+			+ std::string(pEvent->GetName()));
+		return false;
+	}
+}
+
+bool EventManager::VAbortEvent(const EventType& inType, bool allOfType)
+{
+	GCC_ASSERT(m_activeQueue >= 0);
+	GCC_ASSERT(m_activeQueue < EVENTMANAGER_NUM_QUEUES);
+
+	bool success = false;
+	EventListenerMap::iterator findIt = m_eventListeners.find(inType);
+	if(findIt != m_eventListeners.end())
+	{
+		EventQueue& eventQueue = m_queues[m_activeQueue];
+		auto it = eventQueue.begin();
+		while(it != eventQueue.end())
+		{
+			auto thisIt = it;
+			++it;
+			if((*thisIt)->VGetEventType() == inType)
+			{
+				eventQueue.erase(thisIt);
+				success = true;
+				if(!allOfType)
+					break;
+			}
+		}
+	}
+	return success;
+}
+
+bool EventManager::VUpdate(unsigned long maxMillis)
+{
+	unsigned long currMs = GetTickCount();
+	unsigned long maxMs = ((maxMillis == IEventManager::kINFINITE) ? (IEventManager::kINFINITE) : (currMs + maxMillis));
+
+	
+
+    int queueToProcess = m_activeQueue;
+	m_activeQueue = (m_activeQueue + 1) % EVENTMANAGER_NUM_QUEUES;
+	m_queues[m_activeQueue].clear();
+
+    GCC_LOG("EventLoop", "Processing Event Queue " + ToStr(queueToProcess) + "; " + ToStr((unsigned long)m_queues[queueToProcess].size()) + " events to process");
+
+	
+	while (!m_queues[queueToProcess].empty())
+	{
+        
+		IEventDataPtr pEvent = m_queues[queueToProcess].front();
+        m_queues[queueToProcess].pop_front();
+        GCC_LOG("EventLoop", "\t\tProcessing Event " + std::string(pEvent->GetName()));
+
+		const EventType& eventType = pEvent->VGetEventType();
+
+       
+		auto findIt = m_eventListeners.find(eventType);
+		if (findIt != m_eventListeners.end())
+		{
+			const EventListenerList& eventListeners = findIt->second;
+            GCC_LOG("EventLoop", "\t\tFound " + ToStr((unsigned long)eventListeners.size()) + " delegates");
+
+           
+			for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it)
+			{
+                EventListenerDelegate listener = (*it);
+                GCC_LOG("EventLoop", "\t\tSending event " + std::string(pEvent->GetName()) + " to delegate");
+				listener(pEvent);
+			}
+		}
+
+        
+		currMs = GetTickCount();
+		if (maxMillis != IEventManager::kINFINITE && currMs >= maxMs)
+        {
+            GCC_LOG("EventLoop", "Aborting event processing; time ran out");
+			break;
+        }
+	}
+	
+	
+	bool queueFlushed = (m_queues[queueToProcess].empty());
+	if (!queueFlushed)
+	{
+		while (!m_queues[queueToProcess].empty())
+		{
+			IEventDataPtr pEvent = m_queues[queueToProcess].back();
+			m_queues[queueToProcess].pop_back();
+			m_queues[m_activeQueue].push_front(pEvent);
+		}
+	}
+	
+	return queueFlushed;
+}
+
