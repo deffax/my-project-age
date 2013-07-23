@@ -22,6 +22,6 @@ public:
 	virtual bool VTriggerEvent(const IEventDataPtr& pEvent) const;
 	virtual bool VQueueEvent(const IEventDataPtr& pEvent);
 	//virtual bool VThreadSafeQueueEvent(const IEventDataPtr& pEvent);
-	virtual bool VAbortEvent(const IEventDataPtr& pEvent, bool allOfType = false) = 0;
-	virtual bool VUpdate(unsigned long maxMillis = kINFINITE) = 0;
+	virtual bool VAbortEvent(const EventType& pEvent, bool allOfType = false);
+	virtual bool VUpdate(unsigned long maxMillis = kINFINITE);
 };
