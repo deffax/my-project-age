@@ -199,6 +199,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Actors\Actor.h" />
+    <ClInclude Include="..\Actors\ActorComponent.h" />
+    <ClInclude Include="..\Actors\ActorFactory.h" />
     <ClInclude Include="..\Debugging\Logger.h" />
     <ClInclude Include="..\EventManager\EventManager.h" />
     <ClInclude Include="..\EventManager\EventManagerImpl.h" />
@@ -215,6 +218,8 @@
     <ClInclude Include="GameCodeStd.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Actors\Actor.cpp" />
+    <ClCompile Include="..\Actors\ActorFactory.cpp" />
     <ClCompile Include="..\Debugging\Logger.cpp" />
     <ClCompile Include="..\EventManager\EventManager.cpp" />
     <ClCompile Include="..\EventManager\EventManagerImp.cpp" />

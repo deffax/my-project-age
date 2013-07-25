@@ -1,6 +1,8 @@
 #pragma once
 #include "../Mainloop/Initialization.h"
 
+class EventManager;
+
 class GameCodeApp
 {
 protected:
@@ -16,6 +18,8 @@ public:
 
 	struct GameOptions m_Options;
 	class ResCache* m_resCache;
+
+	EventManager* m_pEventManager;
 
 	bool LoadStrings(std::string language);
 	std::wstring GetString(std::wstring sID);

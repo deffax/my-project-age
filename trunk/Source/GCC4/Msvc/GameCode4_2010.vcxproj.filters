@@ -41,6 +41,15 @@
     <ClInclude Include="..\EventManager\EventManagerImpl.h">
       <Filter>EventManager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Actors\Actor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actors\ActorFactory.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actors\ActorComponent.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -74,6 +83,12 @@
     <ClCompile Include="..\EventManager\EventManagerImp.cpp">
       <Filter>EventManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Actors\Actor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Actors\ActorFactory.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameCode4">
@@ -96,6 +111,9 @@
     </Filter>
     <Filter Include="EventManager">
       <UniqueIdentifier>{ae34cb3a-fb59-4927-8493-8a3a0c8589ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{238ee287-23de-4cc8-814c-6e3f33902cf9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
