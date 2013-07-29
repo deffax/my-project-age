@@ -50,6 +50,12 @@
     <ClInclude Include="..\Actors\ActorComponent.h">
       <Filter>Actors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Mainloop\Process.h">
+      <Filter>MainLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mainloop\ProcessManager.h">
+      <Filter>MainLoop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -88,6 +94,12 @@
     </ClCompile>
     <ClCompile Include="..\Actors\ActorFactory.cpp">
       <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mainloop\Process.cpp">
+      <Filter>MainLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mainloop\ProcessManager.cpp">
+      <Filter>MainLoop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
