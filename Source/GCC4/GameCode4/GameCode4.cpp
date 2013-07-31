@@ -24,6 +24,7 @@ INT WINAPI GameCode4(HINSTANCE hInstance,
                      int       nCmdShow)
 {
 	Logger::Init("Logging.xml");
+
 	
 	g_pApp->m_Options.Init("PlayerOptions.xml", lpCmdLine);
 	

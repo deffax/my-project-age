@@ -56,6 +56,9 @@
     <ClInclude Include="..\Mainloop\ProcessManager.h">
       <Filter>MainLoop</Filter>
     </ClInclude>
+    <ClInclude Include="..\LUAScripting\LuaStateManager.h">
+      <Filter>LUAScripting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -101,6 +104,9 @@
     <ClCompile Include="..\Mainloop\ProcessManager.cpp">
       <Filter>MainLoop</Filter>
     </ClCompile>
+    <ClCompile Include="..\LUAScripting\LuaStateManager.cpp">
+      <Filter>LUAScripting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameCode4">
@@ -126,6 +132,9 @@
     </Filter>
     <Filter Include="Actors">
       <UniqueIdentifier>{238ee287-23de-4cc8-814c-6e3f33902cf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LUAScripting">
+      <UniqueIdentifier>{ca18ff3a-f589-4e8a-996d-4fada2e626d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

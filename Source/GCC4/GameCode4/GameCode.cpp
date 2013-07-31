@@ -1,6 +1,7 @@
 #include "GameCodeStd.h"
 #include "../Mainloop/Initialization.h"
 #include "../EventManager/EventManagerImpl.h"
+#include "../LUAScripting/LuaStateManager.h"
 #include "../ResourceCache/ResCache.h"
 #include "../ResourceCache/XmlResource.h"
 #include "../Utilities/String.h"
@@ -61,6 +62,12 @@ bool GameCodeApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd,
 	if(!LoadStrings("English"))
 	{
 		GCC_ERROR("Failed to Load strings");
+		return false;
+	}
+
+	if(!LuaStateManager::Create())
+		{
+		GCC_ERROR("Failed to create LuaStateManager");
 		return false;
 	}
 

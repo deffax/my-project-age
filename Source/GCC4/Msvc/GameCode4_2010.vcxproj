@@ -207,6 +207,7 @@
     <ClInclude Include="..\EventManager\EventManagerImpl.h" />
     <ClInclude Include="..\GameCode4\GameCode.h" />
     <ClInclude Include="..\GameCode4\Interfaces.h" />
+    <ClInclude Include="..\LUAScripting\LuaStateManager.h" />
     <ClInclude Include="..\Mainloop\Initialization.h" />
     <ClInclude Include="..\Mainloop\Process.h" />
     <ClInclude Include="..\Mainloop\ProcessManager.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="..\EventManager\EventManagerImp.cpp" />
     <ClCompile Include="..\GameCode4\GameCode.cpp" />
     <ClCompile Include="..\GameCode4\GameCode4.cpp" />
+    <ClCompile Include="..\LUAScripting\LuaStateManager.cpp" />
     <ClCompile Include="..\Mainloop\Initialization.cpp" />
     <ClCompile Include="..\Mainloop\Process.cpp" />
     <ClCompile Include="..\Mainloop\ProcessManager.cpp" />
