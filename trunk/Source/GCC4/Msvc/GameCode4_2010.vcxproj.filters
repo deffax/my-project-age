@@ -59,6 +59,15 @@
     <ClInclude Include="..\LUAScripting\LuaStateManager.h">
       <Filter>LUAScripting</Filter>
     </ClInclude>
+    <ClInclude Include="..\Graphics3D\D3DRenderer.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UserInterface\HumanView.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\Geometry.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -107,6 +116,15 @@
     <ClCompile Include="..\LUAScripting\LuaStateManager.cpp">
       <Filter>LUAScripting</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics3D\D3DRenderer.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UserInterface\HumanView.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics3D\Geometry.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameCode4">
@@ -135,6 +153,12 @@
     </Filter>
     <Filter Include="LUAScripting">
       <UniqueIdentifier>{ca18ff3a-f589-4e8a-996d-4fada2e626d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics3D">
+      <UniqueIdentifier>{e4bbf682-7433-44ca-92e9-0cf8ede41a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface">
+      <UniqueIdentifier>{68515e0c-835c-44b2-96a6-84535be5872b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -77,9 +77,9 @@ using fastdelegate::MakeDelegate;
 #include "..\Debugging\Logger.h"  // this should be the first of the gcc includes since it defines GCC_ASSERT()
 #include "..\Utilities\types.h"
 #include "..\Utilities\templates.h"
-//#include "..\Graphics3D\geometry.h"
+#include "..\Graphics3D\geometry.h"
 
-/*typedef D3DXCOLOR Color;
+typedef D3DXCOLOR Color;
 
 extern Color g_White;
 extern Color g_Black;
@@ -93,17 +93,18 @@ extern Color g_Gray25;
 extern Color g_Gray65;
 extern Color g_Transparent;
 
-extern Vec3 g_Up;
-extern Vec3 g_Right;
-extern Vec3 g_Forward;
 
+/*
 extern Vec4 g_Up4;
 extern Vec4 g_Right4;
 extern Vec4 g_Forward4;*/
 
+extern Vec3 g_Up;
+extern Vec3 g_Right;
+extern Vec3 g_Forward;
 
 
-//  AppMsg				- Chapter 9, page 248
+
 
 struct AppMsg
 {
@@ -119,12 +120,12 @@ struct AppMsg
 
 
 // Useful #defines
-/*
+
 extern const float fOPAQUE;
 extern const int iOPAQUE;
 extern const float fTRANSPARENT;
 extern const int iTRANSPARENT;
-*/
+
 extern const int MEGABYTE;
 extern const float SIXTY_HERTZ;
 
