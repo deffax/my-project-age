@@ -36,6 +36,8 @@ public:
 
 	virtual bool VPreRender();
 	virtual bool VPostRender();
+	virtual void VDrawLine(const Vec3& from, const Vec3& to, const Color& color);
+
 protected:
 	D3DCOLOR m_backgroundColor;
 	ID3DXFont* m_pFont;

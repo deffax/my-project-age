@@ -1,5 +1,13 @@
 #pragma once
 
+struct D3D9Vertex_Colored
+{
+    D3DXVECTOR3 position; 
+    D3DCOLOR    color;    
+
+	static const DWORD FVF;
+};
+
 class Vec3 : public D3DXVECTOR3
 {
 public:

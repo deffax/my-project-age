@@ -1,10 +1,12 @@
 #include "GameCodeStd.h"
 #include "../Mainloop/Initialization.h"
+#include "../Graphics3D/D3DRenderer.h"
 #include "../EventManager/EventManagerImpl.h"
 #include "../LUAScripting/LuaStateManager.h"
 #include "../ResourceCache/ResCache.h"
 #include "../ResourceCache/XmlResource.h"
 #include "../Utilities/String.h"
+
 
 GameCodeApp* g_pApp = NULL;
 
@@ -17,11 +19,13 @@ GameCodeApp::GameCodeApp()
 bool GameCodeApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd,
 		int screenWidth, int screenHeight)
 {
+
+	
 #ifndef _DEBUG
 	if(!IsOnlyInstance(VGetGameTitle()))
 		return false;
 #endif
-
+	
 	SetCursor(NULL);
 
 	bool resourceCheck = false;
@@ -141,6 +145,16 @@ bool GameCodeApp::LoadStrings(std::string language)
 		}
 	}
 	return true;
+}
+
+GameCodeApp::Renderer GameCodeApp::GetRendererImpl()
+{
+	if(DXUTGetDeviceSettings().ver == DXUT_D3D9_DEVICE)
+		return Renderer_D3D9;
+	else
+		return Renderer_D3D11;
+
+	return Renderer_Unknown;
 }
 
 
