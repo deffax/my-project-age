@@ -15,6 +15,14 @@ typedef shared_ptr<ActorComponent> StrongActorComponentPtr;
 typedef weak_ptr<Actor> WeakActorPtr;
 typedef weak_ptr<ActorComponent> WeakActorComponentPtr;
 
+template<class T>
+struct SortBy_SharedPtr_Content
+{
+    bool operator()(const shared_ptr<T> &lhs, const shared_ptr<T> &rhs) const
+        { return *lhs < *rhs; }
+};
+
+
 
 class Resource;
 class IResourceFile;
@@ -83,6 +91,7 @@ public:
 	virtual void VShutDown() = 0;
 	virtual bool VPreRender() = 0;
 	virtual bool VPostRender() = 0;
+	virtual void VDrawLine(const Vec3& from, const Vec3& to, const Color& color) = 0;
 };
 
 enum GameViewType
@@ -100,15 +109,36 @@ extern const GameViewId gc_InvalidGameViewId;
 class IGameView
 {
 public:
-	virtual HRESULT VOnRestore() = 0;
+	virtual void VOnRestore() = 0;
 	virtual void VOnRender(double fTime, float elapsedTime) = 0;
-	virtual HRESULT VOnLostDevice() = 0;
+	virtual void VOnLostDevice() = 0;
 	virtual GameViewType VGetType() const = 0;
 	virtual GameViewId VGetId() const = 0;
 	virtual void VOnAttach(GameViewId vid, ActorId aid) = 0;
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
 	virtual void VOnUpdate(unsigned long deltaMs) = 0;
 	virtual ~IGameView() {};
+};
+
+class IKeyboardHandler
+{
+public:
+	virtual bool VOnKeyDown(const BYTE c)=0;
+	virtual bool VOnKeyUp(const BYTE c)=0;
+};
+
+class IPointerHandler
+{
+public:
+	virtual bool VOnPointerMove(const Point &pos, const int radius) = 0;
+	virtual bool VOnPointerButtonDown(const Point &pos, const int radius, const std::string &buttonName) = 0;
+	virtual bool VOnPointerButtonUp(const Point &pos, const int radius, const std::string &buttonName) = 0;
+};
+
+class IDummy
+{
+	virtual void met1() = 0;
+	virtual void met2() = 0;
 };
 
 typedef std::list<shared_ptr<IGameView> > GameViewList;

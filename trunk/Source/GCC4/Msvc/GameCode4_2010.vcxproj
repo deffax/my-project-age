@@ -218,6 +218,7 @@
     <ClInclude Include="..\ResourceCache\XmlResource.h" />
     <ClInclude Include="..\ResourceCache\ZipFile.h" />
     <ClInclude Include="..\UserInterface\HumanView.h" />
+    <ClInclude Include="..\Utilities\dummy.h" />
     <ClInclude Include="..\Utilities\String.h" />
     <ClInclude Include="..\Utilities\templates.h" />
     <ClInclude Include="..\Utilities\types.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="..\ResourceCache\XmlResource.cpp" />
     <ClCompile Include="..\ResourceCache\ZipFile.cpp" />
     <ClCompile Include="..\UserInterface\HumanView.cpp" />
+    <ClCompile Include="..\Utilities\dummy.cpp" />
     <ClCompile Include="..\Utilities\String.cpp" />
     <ClCompile Include="GameCodeStd.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

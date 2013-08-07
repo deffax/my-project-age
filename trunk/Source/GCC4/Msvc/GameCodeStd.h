@@ -77,7 +77,7 @@ using fastdelegate::MakeDelegate;
 #include "..\Debugging\Logger.h"  // this should be the first of the gcc includes since it defines GCC_ASSERT()
 #include "..\Utilities\types.h"
 #include "..\Utilities\templates.h"
-#include "..\Graphics3D\geometry.h"
+#include "..\Graphics3D\Geometry.h"
 
 typedef D3DXCOLOR Color;
 

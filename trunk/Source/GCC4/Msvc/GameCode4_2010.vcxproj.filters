@@ -68,6 +68,9 @@
     <ClInclude Include="..\Graphics3D\Geometry.h">
       <Filter>Graphics3D</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\dummy.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -124,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="..\Graphics3D\Geometry.cpp">
       <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utilities\dummy.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

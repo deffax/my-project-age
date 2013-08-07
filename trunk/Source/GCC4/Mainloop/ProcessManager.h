@@ -1,20 +1,30 @@
 #pragma once
+
+
+
 #include "Process.h"
 
 class ProcessManager
 {
 	typedef std::list<StrongProcessPtr> ProcessList;
+
 	ProcessList m_processList;
 
 public:
-	~ProcessManager();
+	
+	
+	~ProcessManager(void);
 
-	unsigned int UpdateProcess(unsigned long int deltaMs);
-	WeakProcessPtr AttachProcess(StrongProcessPtr pProcess);
-	void AbortAllProcess(bool immediate);
+	
+	unsigned int UpdateProcesses(unsigned long deltaMs);  // updates all attached processes
+	WeakProcessPtr AttachProcess(StrongProcessPtr pProcess);  // attaches a process to the process mgr
+	void AbortAllProcesses(bool immediate);
 
-	unsigned int GetProcessCount() const {return m_processList.size();}
+	
+	unsigned int GetProcessCount(void) const { return m_processList.size(); }
 
 private:
-	void ClearAllProcesses();
+	void ClearAllProcesses(void);  
 };
+
+

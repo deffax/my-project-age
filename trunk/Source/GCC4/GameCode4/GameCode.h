@@ -6,15 +6,30 @@ class EventManager;
 class GameCodeApp
 {
 protected:
+	Point m_screenSize;
+
 	std::map<std::wstring, std::wstring> m_textResource;
 	std::map<std::wstring, UINT> m_hotkeys;
 public:
 	GameCodeApp();
+	
+	const Point &GetScreenSize() {return m_screenSize;}
 
 	virtual TCHAR* VGetGameTitle() = 0;
 
 	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = NULL,
 		int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);
+
+	enum Renderer
+	{
+		Renderer_Unknown,
+		Renderer_D3D9,
+		Renderer_D3D11
+	};
+
+	shared_ptr<IRenderer> m_Renderer;
+
+	static Renderer GetRendererImpl();
 
 	struct GameOptions m_Options;
 	class ResCache* m_resCache;
