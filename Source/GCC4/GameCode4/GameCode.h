@@ -15,7 +15,9 @@ public:
 	
 	const Point &GetScreenSize() {return m_screenSize;}
 
-	virtual TCHAR* VGetGameTitle() = 0;
+	virtual TCHAR *VGetGameTitle()=0;
+	//virtual TCHAR *VGetGameAppDirectory()=0;
+	//virtual HICON VGetIcon()=0;
 
 	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = NULL,
 		int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);

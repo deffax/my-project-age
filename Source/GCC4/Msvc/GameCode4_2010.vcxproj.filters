@@ -71,6 +71,12 @@
     <ClInclude Include="..\Utilities\dummy.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\GameCode4\BaseGameLogic.h">
+      <Filter>GameCode4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EventManager\Events.h">
+      <Filter>EventManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -130,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="..\Utilities\dummy.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameCode4\BaseGameLogic.cpp">
+      <Filter>GameCode4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EventManager\Events.cpp">
+      <Filter>EventManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

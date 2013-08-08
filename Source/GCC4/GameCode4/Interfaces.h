@@ -142,3 +142,15 @@ class IDummy
 };
 
 typedef std::list<shared_ptr<IGameView> > GameViewList;
+
+class IGameLogic
+{
+public:
+	virtual WeakActorPtr VGetActor(const ActorId id) = 0;
+	virtual StrongActorPtr VCreateActor(const std::string& actorResource, TiXmlElement* overrides,
+		Mat4x4* initialTransform = NULL) = 0;
+	virtual void VDestroyActor(const ActorId actorId) = 0;
+	virtual void VOnUpdate(float time, float elapsedTime) = 0;
+	virtual void VChangeState(enum BaseGameState newState) = 0;
+
+};
