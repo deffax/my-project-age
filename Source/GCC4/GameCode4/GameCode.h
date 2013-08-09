@@ -1,12 +1,20 @@
 #pragma once
 #include "../Mainloop/Initialization.h"
+#include "BaseGameLogic.h"
 
 class EventManager;
+
+class HumanView;
 
 class GameCodeApp
 {
 protected:
 	Point m_screenSize;
+	HINSTANCE m_hInstance;
+	bool m_bIsRunning;
+	bool m_bQuitting;
+	Rect m_rcDesktop;
+	int m_iColorDepth;
 
 	std::map<std::wstring, std::wstring> m_textResource;
 	std::map<std::wstring, UINT> m_hotkeys;
@@ -17,11 +25,15 @@ public:
 
 	virtual TCHAR *VGetGameTitle()=0;
 	//virtual TCHAR *VGetGameAppDirectory()=0;
-	//virtual HICON VGetIcon()=0;
+	virtual HICON VGetIcon()=0;
+	
 
+	HWND GetHwnd() {return DXUTGetHWND();}
+	HINSTANCE GetInstance() { return m_hInstance; }
 	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = NULL,
 		int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);
 
+	LRESULT OnNcCreate(LPCREATESTRUCT cs);
 	enum Renderer
 	{
 		Renderer_Unknown,
@@ -32,16 +44,18 @@ public:
 	shared_ptr<IRenderer> m_Renderer;
 
 	static Renderer GetRendererImpl();
-
+	BaseGameLogic* m_pGame;
 	struct GameOptions m_Options;
 	class ResCache* m_resCache;
 
 	EventManager* m_pEventManager;
-
+	BaseGameLogic* GetGameLogic(void) const { return m_pGame; }
 	bool LoadStrings(std::string language);
 	std::wstring GetString(std::wstring sID);
 	UINT MapCharToKeyCode(const char pHotKey);
 
+	//HumanView* GetHumanView();
+	virtual BaseGameLogic *VCreateGameAndView()=0;
 	// DirectX9 Specific Stuff
 	static bool CALLBACK IsD3D9DeviceAcceptable( D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat, bool bWindowed, void* pUserContext );
 	static HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext );
@@ -58,6 +72,11 @@ public:
 	static void CALLBACK OnD3D11DestroyDevice( void* pUserContext );
 	static void CALLBACK OnD3D11FrameRender( ID3D11Device* pd3dDevice, ID3D11DeviceContext* pd3dImmediateContext, double fTime, float fElapsedTime, void* pUserContext );
 
+	
+	void AbortGame() { m_bQuitting = true; }
+	int GetExitCode() { return DXUTGetExitCode(); }
+	bool IsRunning() { return m_bIsRunning; }
+	void SetQuitting(bool quitting) { m_bQuitting = quitting; }
 
 };
 

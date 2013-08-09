@@ -14,6 +14,7 @@
 #pragma comment(lib, "dxerr.lib")
 #pragma comment(lib, "D3dx9.lib")
 #pragma comment(lib, "D3DX11.lib")
+//#pragma comment(lib, "dxguid.lib")
 
 
 
