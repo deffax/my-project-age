@@ -1,4 +1,5 @@
 #include "GameCodeStd.h"
+
 #include "../Mainloop/Initialization.h"
 #include "../Graphics3D/D3DRenderer.h"
 #include "../EventManager/EventManagerImpl.h"
@@ -48,6 +49,8 @@ bool GameCodeApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd,
 		resourceCheck = true;
 	}
 
+	m_hInstance = hInstance;
+
 	IResourceFile *zipFile = GCC_NEW ResourceZipFile(L"Assets.zip");
 	m_resCache = GCC_NEW ResCache(50, zipFile);
 
@@ -82,6 +85,37 @@ bool GameCodeApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd,
 		return false;
 	}
 
+	DXUTInit(true, true, lpCmdLine, true);
+	if(hWnd == NULL)
+	{
+		DXUTCreateWindow(VGetGameTitle(), hInstance, VGetIcon());
+	}
+	else
+	{
+		DXUTSetWindow(hWnd, hWnd, hWnd);
+	}
+	if(!GetHwnd())
+		return FALSE;
+
+	SetWindowText(GetHwnd(), VGetGameTitle());
+
+	m_screenSize = Point(screenWidth, screenHeight);
+	DXUTCreateDevice( D3D_FEATURE_LEVEL_10_1, true, screenWidth, screenHeight);
+	if (GetRendererImpl() == Renderer_D3D9)
+	{
+		m_Renderer = shared_ptr<IRenderer>(GCC_NEW D3DRenderer9());
+	}
+	else if (GetRendererImpl() == Renderer_D3D11)
+	{
+		//m_Renderer = shared_ptr<IRenderer>(GCC_NEW D3DRenderer11());
+	}
+	m_Renderer->VSetBackgroundColor(255, 20, 20, 200);
+	//m_Renderer->VOnRestore();
+	m_pGame = VCreateGameAndView();
+	if(!m_pGame)
+		return false;
+
+	m_bIsRunning = true;
 	return true; //PROVVISORIO!!!!
 }
 
@@ -146,6 +180,9 @@ bool GameCodeApp::LoadStrings(std::string language)
 	}
 	return true;
 }
+
+
+
 
 GameCodeApp::Renderer GameCodeApp::GetRendererImpl()
 {
@@ -262,4 +299,5 @@ void CALLBACK GameCodeApp::OnD3D11DestroyDevice( void* pUserContext )
 {
     
 }
+
 

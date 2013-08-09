@@ -37,10 +37,10 @@ public:
 	~BaseGameLogic();
 
 
-	virtual WeakActorPtr VGetActor(const ActorId id);
+	/*virtual WeakActorPtr VGetActor(const ActorId id);
 	virtual StrongActorPtr VCreateActor(const std::string& actorResource, TiXmlElement* overrides,
-		Mat4x4* initialTransform);
-	virtual void VDestroyActor(const ActorId actorId);
+		Mat4x4* initialTransform);*/
+	//virtual void VDestroyActor(const ActorId actorId);
 	virtual void VOnUpdate(float time, float elapsedTime);
 	virtual void VChangeState(enum BaseGameState newState);
 };

@@ -1,6 +1,9 @@
 #include "GameCodeStd.h"
 #include "D3DRenderer.h"
 
+CDXUTDialogResourceManager D3DRenderer::g_DialogResourceManager;
+CDXUTTextHelper *D3DRenderer::g_pTextHelper = NULL;
+
 
 bool D3DRenderer9::VPreRender()
 {
