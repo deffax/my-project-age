@@ -5,6 +5,7 @@
 #include "../EventManager/EventManagerImpl.h"
 #include "../LUAScripting/LuaStateManager.h"
 #include "../ResourceCache/ResCache.h"
+#include "../UserInterface/UserInterface.h"
 #include "../ResourceCache/XmlResource.h"
 #include "../Utilities/String.h"
 
@@ -116,7 +117,7 @@ bool GameCodeApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd,
 		return false;
 
 	m_bIsRunning = true;
-	return true; //PROVVISORIO!!!!
+	return true;
 }
 
 
@@ -181,8 +182,98 @@ bool GameCodeApp::LoadStrings(std::string language)
 	return true;
 }
 
+LRESULT GameCodeApp::OnNcCreate(LPCREATESTRUCT cs)
+{
+	return true;
+}
+
+LRESULT GameCodeApp::OnDisplayChange(int colorDepth, int width, int height)
+{
+	m_rcDesktop.left = 0;
+	m_rcDesktop.top = 0;
+	m_rcDesktop.right = width;
+	m_rcDesktop.left = height;
+	m_iColorDepth = colorDepth;
+	return 0;
+}
 
 
+LRESULT GameCodeApp::OnPowerBroadCast(int event)
+{
+	if(event == PBT_APMQUERYSUSPEND)
+		return BROADCAST_QUERY_DENY;
+	else if(event == PBT_APMBATTERYLOW)
+	{
+		AbortGame();
+	}
+	return true;
+}
+
+LRESULT GameCodeApp::OnClose()
+{
+	SAFE_DELETE(m_pGame);
+	DestroyWindow(GetHwnd());
+	SAFE_DELETE(m_pEventManager);
+	SAFE_DELETE(m_resCache);
+	return 0;
+}
+
+LRESULT GameCodeApp::OnAltEnter()
+{
+	DXUTToggleFullScreen();
+	return 0;
+}
+
+/*
+LRESULT GameCodeApp::OnSysCommand(WPARAM wParam, LPARAM lParam)
+{
+	switch (wParam)
+	{
+		case SC_MAXIMIZE :
+		{
+			
+			if ( m_bWindowedMode && IsRunning() )
+			{				
+				OnAltEnter();
+			}
+		}
+		return 0;
+
+		case SC_CLOSE :
+		{			
+			if ( lParam != g_QuitNoPrompt )
+			{				
+				if ( m_bQuitRequested )
+					return true;
+								
+				m_bQuitRequested = true;
+				
+				if ( MessageBox::Ask(QUESTION_QUIT_GAME) == IDNO )
+				{					
+					m_bQuitRequested = false;
+					
+					return true;
+				}
+			}
+			m_bQuitting = true;
+			
+			if ( HasModalDialog() )
+			{				
+				ForceModalExit();				
+				PostMessage( GetHwnd(), WM_SYSCOMMAND, SC_CLOSE, g_QuitNoPrompt );
+				m_bQuitRequested = false;		
+				return true;
+			}			
+			m_bQuitRequested = false;
+		}
+		return 0;
+		default:			
+			return DefWindowProc(GetHwnd(), WM_SYSCOMMAND, wParam, lParam);
+	}
+	return 0;
+}
+
+*/
 
 GameCodeApp::Renderer GameCodeApp::GetRendererImpl()
 {
@@ -193,6 +284,11 @@ GameCodeApp::Renderer GameCodeApp::GetRendererImpl()
 
 	return Renderer_Unknown;
 }
+
+
+
+
+
 
 
 //--------------------------------------------------------------------------------------

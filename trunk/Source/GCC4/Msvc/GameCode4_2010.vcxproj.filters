@@ -77,6 +77,9 @@
     <ClInclude Include="..\EventManager\Events.h">
       <Filter>EventManager</Filter>
     </ClInclude>
+    <ClInclude Include="..\UserInterface\UserInterface.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
