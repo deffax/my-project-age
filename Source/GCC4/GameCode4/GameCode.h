@@ -1,6 +1,7 @@
 #pragma once
 #include "../Mainloop/Initialization.h"
 #include "BaseGameLogic.h"
+#include "../UserInterface/UserInterface.h"
 
 class EventManager;
 
@@ -15,6 +16,9 @@ protected:
 	bool m_bQuitting;
 	Rect m_rcDesktop;
 	int m_iColorDepth;
+	int m_HasModalDialog;
+	bool m_bWindowedMode;
+	bool m_bQuitRequested;
 
 	std::map<std::wstring, std::wstring> m_textResource;
 	std::map<std::wstring, UINT> m_hotkeys;
@@ -27,13 +31,22 @@ public:
 	//virtual TCHAR *VGetGameAppDirectory()=0;
 	virtual HICON VGetIcon()=0;
 	
+	LRESULT OnDisplayChange(int colorDepth, int width, int height);
+	LRESULT OnNcCreate(LPCREATESTRUCT cs);
+	LRESULT OnPowerBroadCast(int event);
+	LRESULT OnClose();
+	LRESULT OnAltEnter();
+	//LRESULT OnSysCommand(WPARAM wParam, LPARAM lParam);
+
+	bool HasModalDialog() { return m_HasModalDialog!=0; }
+	void ForceModalExit() { PostMessage(GetHwnd(), g_MsgEndModal, 0, g_QuitNoPrompt);}
 
 	HWND GetHwnd() {return DXUTGetHWND();}
 	HINSTANCE GetInstance() { return m_hInstance; }
 	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = NULL,
 		int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);
 
-	LRESULT OnNcCreate(LPCREATESTRUCT cs);
+	
 	enum Renderer
 	{
 		Renderer_Unknown,

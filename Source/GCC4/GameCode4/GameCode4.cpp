@@ -24,6 +24,24 @@ INT WINAPI GameCode4(HINSTANCE hInstance,
                      LPWSTR    lpCmdLine,
                      int       nCmdShow)
 {
+
+	
+	//
+	int tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+
+	// set this flag to keep memory blocks around
+	// tmpDbgFlag |= _CRTDBG_DELAY_FREE_MEM_DF;	       // this flag will cause intermittent pauses in your game and potientially cause it to run out of memory!
+
+	// perform memory check for each alloc/dealloc
+	//tmpDbgFlag |= _CRTDBG_CHECK_ALWAYS_DF;		   // remember this is VERY VERY SLOW!
+
+	//_CRTDBG_LEAK_CHECK_DF is used at program initialization to force a 
+	//   leak check just before program exit. This is important because
+	//   some classes may dynamically allocate memory in globally constructed
+	//   objects.
+	tmpDbgFlag |= _CRTDBG_LEAK_CHECK_DF;					
+
+	_CrtSetDbgFlag(tmpDbgFlag);
 	Logger::Init("Logging.xml");
 
 	
@@ -70,6 +88,6 @@ INT WINAPI GameCode4(HINSTANCE hInstance,
 	DXUTMainLoop();
 	DXUTShutdown();
 	Logger::Destroy();
-    return 0;	
+	return g_pApp->GetExitCode();	
 }
 

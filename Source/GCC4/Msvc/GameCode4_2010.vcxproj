@@ -220,6 +220,7 @@
     <ClInclude Include="..\ResourceCache\XmlResource.h" />
     <ClInclude Include="..\ResourceCache\ZipFile.h" />
     <ClInclude Include="..\UserInterface\HumanView.h" />
+    <ClInclude Include="..\UserInterface\UserInterface.h" />
     <ClInclude Include="..\Utilities\dummy.h" />
     <ClInclude Include="..\Utilities\String.h" />
     <ClInclude Include="..\Utilities\templates.h" />
