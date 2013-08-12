@@ -72,7 +72,7 @@ public:
 	virtual int VGetZOrder() const = 0;
 	virtual void VSetZOrder(int const ZOrder) = 0;
 	virtual bool VIsVisible() const = 0;
-	virtual bool VSetVisible(bool visible) = 0;
+	virtual void VSetVisible(bool visible) = 0;
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
 	virtual ~IScreenElement() {}
 	virtual bool const operator<(IScreenElement const &other)

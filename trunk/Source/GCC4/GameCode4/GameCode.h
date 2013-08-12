@@ -22,6 +22,10 @@ protected:
 
 	std::map<std::wstring, std::wstring> m_textResource;
 	std::map<std::wstring, UINT> m_hotkeys;
+
+	
+	int PumpUntilMessage (UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam);
+	void FlashWhileMinimized();
 public:
 	GameCodeApp();
 	
@@ -38,10 +42,12 @@ public:
 	LRESULT OnAltEnter();
 	//LRESULT OnSysCommand(WPARAM wParam, LPARAM lParam);
 
+	
+	int Modal(shared_ptr<IScreenElement> pModalScreen, int defaultAnswer);
 	bool HasModalDialog() { return m_HasModalDialog!=0; }
 	void ForceModalExit() { PostMessage(GetHwnd(), g_MsgEndModal, 0, g_QuitNoPrompt);}
 
-	HWND GetHwnd() {return DXUTGetHWND();}
+	HWND GetHwnd();
 	HINSTANCE GetInstance() { return m_hInstance; }
 	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = NULL,
 		int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);
@@ -67,7 +73,7 @@ public:
 	std::wstring GetString(std::wstring sID);
 	UINT MapCharToKeyCode(const char pHotKey);
 
-	//HumanView* GetHumanView();
+	HumanView* GetHumanView();
 	virtual BaseGameLogic *VCreateGameAndView()=0;
 	// DirectX9 Specific Stuff
 	static bool CALLBACK IsD3D9DeviceAcceptable( D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat, bool bWindowed, void* pUserContext );

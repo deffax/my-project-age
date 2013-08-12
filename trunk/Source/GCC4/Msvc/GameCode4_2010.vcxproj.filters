@@ -80,6 +80,9 @@
     <ClInclude Include="..\UserInterface\UserInterface.h">
       <Filter>UserInterface</Filter>
     </ClInclude>
+    <ClInclude Include="..\UserInterface\MessageBox.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCodeStd.cpp" />
@@ -145,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="..\EventManager\Events.cpp">
       <Filter>EventManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UserInterface\MessageBox.cpp">
+      <Filter>UserInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

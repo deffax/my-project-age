@@ -7,6 +7,7 @@
 #include "../ResourceCache/ResCache.h"
 #include "../UserInterface/UserInterface.h"
 #include "../ResourceCache/XmlResource.h"
+#include "../UserInterface/HumanView.h"
 #include "../Utilities/String.h"
 
 
@@ -274,6 +275,132 @@ LRESULT GameCodeApp::OnSysCommand(WPARAM wParam, LPARAM lParam)
 }
 
 */
+
+
+HWND GameCodeApp::GetHwnd()
+{ 
+	return DXUTGetHWND();
+} 
+
+
+
+
+HumanView* GameCodeApp::GetHumanView()
+{
+	HumanView* pView = NULL;
+	for(GameViewList::iterator i = m_pGame->m_gameViews.begin();
+		i != m_pGame->m_gameViews.end(); ++i)
+	{
+		if((*i)->VGetType() == GameView_Human)
+		{
+			shared_ptr<IGameView> pIGameView(*i);
+			pView = static_cast<HumanView* >(&*pIGameView);
+			break;
+		}
+	}
+	return pView;
+}
+
+void GameCodeApp::FlashWhileMinimized()
+{
+	if(!GetHwnd())
+		return;
+	if(IsIconic(GetHwnd()))
+	{
+		DWORD now = timeGetTime();
+		DWORD then = now;
+		MSG msg;
+		FlashWindow(GetHwnd(), true);
+
+		while(true)
+		{
+			if ( PeekMessage( &msg, NULL, 0, 0, 0 ) )
+			{
+				if ( msg.message != WM_SYSCOMMAND || msg.wParam != SC_CLOSE )
+				{
+					TranslateMessage(&msg);
+					DispatchMessage(&msg);
+				}
+				
+				// Are we done?
+				if ( ! IsIconic(GetHwnd()) )
+				{
+					FlashWindow( GetHwnd(), false );
+					break;
+				}
+			}
+			else
+			{
+				now = timeGetTime();
+				DWORD timeSpan = now > then ? (now - then) : (then - now);
+				if ( timeSpan > 1000 )
+				{
+					then = now;
+					FlashWindow( GetHwnd(), true );
+				}
+			}
+		}
+	}
+}
+
+int GameCodeApp::PumpUntilMessage (UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam)
+{
+	int currentTime = timeGetTime();
+	MSG msg;
+	for ( ;; )
+	{
+		if ( PeekMessage( &msg, NULL, 0, 0, PM_NOREMOVE ) )
+		{
+			if (msg.message == WM_CLOSE)
+			{
+				m_bQuitting = true;
+				GetMessage(& msg, NULL, 0, 0);
+				break;
+			}
+			else
+			{
+				// Default processing
+				if (GetMessage(&msg, NULL, NULL, NULL))
+				{
+					TranslateMessage(&msg);
+					DispatchMessage(&msg);
+				}
+
+				// Are we done?
+				if ( msg.message == msgEnd)
+					break;
+			}
+		}
+		else
+		{
+			// Update the game views, but nothing else!
+			// Remember this is a modal screen.
+			if (m_pGame)
+			{
+				int timeNow = timeGetTime();
+				int deltaMilliseconds = timeNow - currentTime;
+				for(GameViewList::iterator i=m_pGame->m_gameViews.begin(); i!=m_pGame->m_gameViews.end(); ++i)
+				{
+					(*i)->VOnUpdate( deltaMilliseconds );
+				}
+				currentTime = timeNow;
+				DXUTRender3DEnvironment();
+			}
+		}
+	}
+	if (pLParam)
+		*pLParam = msg.lParam;
+	if (pWParam)
+		*pWParam = msg.wParam;
+
+	return 0;
+}
+
+int GameCodeApp::Modal(shared_ptr<IScreenElement> pModalScreen, int defaultAnswer)
+{
+	return 1; // PROVVISORIO!
+}
+
 
 GameCodeApp::Renderer GameCodeApp::GetRendererImpl()
 {
