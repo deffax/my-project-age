@@ -14,7 +14,7 @@
 #pragma comment(lib, "dxerr.lib")
 #pragma comment(lib, "D3dx9.lib")
 #pragma comment(lib, "D3DX11.lib")
-//#pragma comment(lib, "dxguid.lib")
+
 
 
 
@@ -46,6 +46,8 @@ INT WINAPI GameCode4(HINSTANCE hInstance,
 
 	
 	g_pApp->m_Options.Init("PlayerOptions.xml", lpCmdLine);
+
+	DXUTSetCallbackMsgProc(GameCodeApp::MsgProc);
 	
 	if(g_pApp->m_Options.m_Renderer== "Direct3D 9")
 	{
