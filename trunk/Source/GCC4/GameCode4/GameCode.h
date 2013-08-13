@@ -54,6 +54,9 @@ public:
 		int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);
 
 	
+	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, 
+		bool* pNoFurtherProcessing, void* pUserContext);
+
 	enum Renderer
 	{
 		Renderer_Unknown,

@@ -185,6 +185,107 @@ bool GameCodeApp::LoadStrings(std::string language)
 	return true;
 }
 
+
+LRESULT CALLBACK GameCodeApp::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, 
+		bool* pbNoFurtherProcessing, void* pUserContext)
+{
+	*pbNoFurtherProcessing = D3DRenderer::g_DialogResourceManager.MsgProc(hWnd, uMsg, wParam, lParam);
+	if(*pbNoFurtherProcessing)
+		return 0;
+	LRESULT result = 0;
+
+	switch(uMsg)
+	{
+	case WM_POWERBROADCAST:
+		{
+			int event = (int) wParam;
+			result = g_pApp->OnPowerBroadCast(event);
+			break;
+		}
+
+	case WM_DISPLAYCHANGE:
+		{
+			int colorDepth = (int) wParam;
+			int width = (int) LOWORD(lParam);
+			int height = (int) HIWORD(lParam);
+			result = g_pApp->OnDisplayChange(colorDepth, width, height);
+			break;
+		}
+
+	case WM_SYSCOMMAND:
+		{
+			result = g_pApp->OnSysCommand(wParam, lParam);
+			if(result)
+			{
+				*pbNoFurtherProcessing = true;
+			}
+			break;
+		}
+
+	case WM_SYSKEYDOWN:
+		{
+			if(wParam == VK_RETURN)
+			{
+				*pbNoFurtherProcessing = true;
+				return g_pApp->OnAltEnter();
+			}
+			return DefWindowProc(hWnd, uMsg, wParam, lParam);
+		}
+		
+	case WM_CLOSE:
+		{
+			if(g_pApp->m_bQuitting)
+			{
+				result = g_pApp->OnClose();
+			}
+			else
+			{
+				*pbNoFurtherProcessing = true;
+			}
+			break;
+		}
+
+	case WM_KEYDOWN:
+    case WM_KEYUP:
+	case WM_CHAR:
+	case WM_MOUSEMOVE:
+	case WM_LBUTTONDOWN:
+	case WM_LBUTTONUP:
+	case WM_RBUTTONDOWN:
+	case WM_RBUTTONUP:
+	case MM_JOY1BUTTONDOWN:
+	case MM_JOY1BUTTONUP:
+	case MM_JOY1MOVE:
+	case MM_JOY1ZMOVE:
+	case MM_JOY2BUTTONDOWN:
+	case MM_JOY2BUTTONUP:
+	case MM_JOY2MOVE:
+	case MM_JOY2ZMOVE:
+		{
+			if(g_pApp->m_pGame)
+			{
+				BaseGameLogic* pGame = g_pApp->m_pGame;
+				AppMsg msg;
+				msg.m_hWnd = hWnd;
+				msg.m_uMsg = uMsg;
+				msg.m_wParam = wParam;
+				msg.m_lParam = lParam;
+				for(GameViewList::reverse_iterator i=pGame->m_gameViews.rbegin(); i!=pGame->m_gameViews.rend(); ++i)
+				{
+					if ( (*i)->VOnMsgProc( msg ) )
+					{
+						result = true;
+						break;				
+					}
+				}
+			}
+			break;
+		}
+
+	}
+	return result;
+}
+
 LRESULT GameCodeApp::OnNcCreate(LPCREATESTRUCT cs)
 {
 	return true;
