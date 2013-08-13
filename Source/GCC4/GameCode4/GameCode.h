@@ -1,6 +1,7 @@
 #pragma once
 #include "../Mainloop/Initialization.h"
 #include "BaseGameLogic.h"
+
 #include "../UserInterface/UserInterface.h"
 
 class EventManager;
@@ -40,7 +41,7 @@ public:
 	LRESULT OnPowerBroadCast(int event);
 	LRESULT OnClose();
 	LRESULT OnAltEnter();
-	//LRESULT OnSysCommand(WPARAM wParam, LPARAM lParam);
+	LRESULT OnSysCommand(WPARAM wParam, LPARAM lParam);
 
 	
 	int Modal(shared_ptr<IScreenElement> pModalScreen, int defaultAnswer);

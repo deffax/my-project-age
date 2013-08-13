@@ -8,6 +8,8 @@
 #include "../UserInterface/UserInterface.h"
 #include "../ResourceCache/XmlResource.h"
 #include "../UserInterface/HumanView.h"
+#include "../UserInterface/MessageBox.h"
+#include "../UserInterface/UserInterface.h"
 #include "../Utilities/String.h"
 
 
@@ -225,7 +227,7 @@ LRESULT GameCodeApp::OnAltEnter()
 	return 0;
 }
 
-/*
+
 LRESULT GameCodeApp::OnSysCommand(WPARAM wParam, LPARAM lParam)
 {
 	switch (wParam)
@@ -274,7 +276,7 @@ LRESULT GameCodeApp::OnSysCommand(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-*/
+
 
 
 HWND GameCodeApp::GetHwnd()
@@ -398,7 +400,39 @@ int GameCodeApp::PumpUntilMessage (UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam
 
 int GameCodeApp::Modal(shared_ptr<IScreenElement> pModalScreen, int defaultAnswer)
 {
-	return 1; // PROVVISORIO!
+	HumanView* pView = GetHumanView();
+	if(m_HasModalDialog & 0x10000000)
+	{
+		GCC_ASSERT(0 && "too many nested dialogs;");
+		return defaultAnswer;
+	}
+
+	GCC_ASSERT(GetHwnd() != NULL && _T("Main window is NULL!!"));
+	if((GetHwnd() != NULL) && IsIconic(GetHwnd()))
+	{
+		FlashWhileMinimized();
+	}
+
+	m_HasModalDialog <<= 1;
+	m_HasModalDialog |= 1;
+
+	pView->VPushElement(pModalScreen);
+
+	LPARAM lParam = 0;
+	int result = PumpUntilMessage(g_MsgEndModal, NULL, &lParam);
+	
+	if (lParam != 0)
+	{
+		if (lParam==g_QuitNoPrompt)
+			result = defaultAnswer;
+		else	
+			result = (int)lParam;
+	}
+
+	pView->VRemoveElement(pModalScreen);
+	m_HasModalDialog >>= 1;
+
+	return result;
 }
 
 
