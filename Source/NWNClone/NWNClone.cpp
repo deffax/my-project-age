@@ -3,6 +3,7 @@
 #include "../GCC4/Mainloop/Initialization.h"
 
 #include "NWNClone.h"
+#include "NWNCloneView.h"
 
 NWNCloneApp g_NWNCloneApp;
 
@@ -24,5 +25,7 @@ HICON NWNCloneApp::VGetIcon()
 BaseGameLogic* NWNCloneApp::VCreateGameAndView()
 {
 	m_pGame = GCC_NEW NWNCloneLogic();
+	shared_ptr<IGameView> menuView(GCC_NEW MainMenuView());
+	m_pGame->VAddView(menuView);
 	return m_pGame;
 }
