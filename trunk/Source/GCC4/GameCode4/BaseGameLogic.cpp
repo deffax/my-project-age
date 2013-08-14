@@ -72,3 +72,17 @@ void BaseGameLogic::VOnUpdate(float time, float elapsedTime)
 	}
 }
 
+void BaseGameLogic::VAddView(shared_ptr<IGameView> pView, ActorId actorId)
+{
+	
+	int viewId = static_cast<int>(m_gameViews.size());
+	m_gameViews.push_back(pView);
+	pView->VOnAttach(viewId, actorId);
+	pView->VOnRestore();
+}
+
+
+void BaseGameLogic::VRemoveView(shared_ptr<IGameView> pView)
+{
+	m_gameViews.remove(pView);
+}

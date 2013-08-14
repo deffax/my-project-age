@@ -43,4 +43,7 @@ public:
 	//virtual void VDestroyActor(const ActorId actorId);
 	virtual void VOnUpdate(float time, float elapsedTime);
 	virtual void VChangeState(enum BaseGameState newState);
+
+	virtual void VAddView(shared_ptr<IGameView> pView, ActorId actorId = INVALID_ACTOR_ID);
+	virtual void VRemoveView(shared_ptr<IGameView> pView);
 };

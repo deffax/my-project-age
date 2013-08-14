@@ -457,7 +457,7 @@ int GameCodeApp::PumpUntilMessage (UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam
 			if (msg.message == WM_CLOSE)
 			{
 				m_bQuitting = true;
-				GetMessage(& msg, NULL, 0, 0);
+				GetMessage(&msg, NULL, 0, 0);
 				break;
 			}
 			else
