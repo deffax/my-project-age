@@ -575,7 +575,13 @@ HRESULT CALLBACK GameCodeApp::OnD3D9ResetDevice( IDirect3DDevice9* pd3dDevice,
 bool CALLBACK GameCodeApp::IsD3D9DeviceAcceptable( D3DCAPS9* pCaps, D3DFORMAT AdapterFormat,
                                       D3DFORMAT BackBufferFormat, bool bWindowed, void* pUserContext )
 {
-   
+   IDirect3D9* pD3D = DXUTGetD3D9Object();
+   if(FAILED(pD3D->CheckDeviceFormat(pCaps->AdapterOrdinal, pCaps->DeviceType, AdapterFormat,
+	   D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING, D3DRTYPE_TEXTURE, BackBufferFormat)))
+	   return false;
+
+   if(pCaps->PixelShaderVersion > D3DPS_VERSION(2, 0))
+	   return false;
     return true;
 }
 
